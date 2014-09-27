@@ -11,7 +11,7 @@
  * Plugin Name:       TAP Cookies
  * Plugin URI:       http://www.todoapuestas.org
  * Description:       Display a information message about Europe Cookies Law
- * Version:           1.2.0
+ * Version:           1.2.1
  * Author:       Alain Sanchez
  * Author URI:       http://www.inetzwerk.com
  * Text Domain:       tap-cookies

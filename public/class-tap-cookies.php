@@ -449,72 +449,74 @@ class TAP_Cookies {
      *
      * @since     1.2.0
      */
-    public function enqueue_scripts_footer() { ?>  <script type="text/javascript">
-        var TAP_Cookies = function(){
-            var cookie_name = '_tap_cookie';
-            var information_box_title = '<?php echo $this->get_information_box_title(); ?>';
-            var information_box_text = '<?php echo $this->get_information_box_text(); ?>';
-            var position = '<?php echo $this->get_information_box_position(); ?>';
+    public function enqueue_scripts_footer() {
+        if(!wp_is_mobile()): ?>
+        <script type="text/javascript">
+            var TAP_Cookies = function(){
+                var cookie_name = '_tap_cookie';
+                var information_box_title = '<?php echo $this->get_information_box_title(); ?>';
+                var information_box_text = '<?php echo $this->get_information_box_text(); ?>';
+                var position = '<?php echo $this->get_information_box_position(); ?>';
 
-            var create_cookie = function(){
-                jQuery.cookie(cookie_name, 1, { expires: 365, path: '/' });
-            }
-
-            var clear_cookies = function() {
-                var all_cookies = document.cookie.split(";");
-
-                for(var i = 0; i < all_cookies.length; i++){
-                    jQuery.cookie(all_cookies[i].split("=")[0], null, { expires: -365, path: '/' } );
+                var create_cookie = function(){
+                    jQuery.cookie(cookie_name, 1, { expires: 365, path: '/' });
                 }
-            }
 
-            return {
-                init: function(){
-                    toastr.options = {
-                        "closeButton": true,
-                        "debug": true,
-                        "positionClass": "toast-"+position,
-                        "showDuration": "10000000",
-                        "hideDuration": "10000000",
-                        "timeOut": "10000000",
-                        "extendedTimeOut": "10000000",
-                        "showEasing": "swing",
-                        "hideEasing": "linear",
-                        "showMethod": "fadeIn",
-                        "hideMethod": "fadeOut",
-                        onHidden: function() {
-                            create_cookie();
+                var clear_cookies = function() {
+                    var all_cookies = document.cookie.split(";");
+
+                    for(var i = 0; i < all_cookies.length; i++){
+                        jQuery.cookie(all_cookies[i].split("=")[0], null, { expires: -365, path: '/' } );
+                    }
+                }
+
+                return {
+                    init: function(){
+                        toastr.options = {
+                            "closeButton": true,
+                            "debug": true,
+                            "positionClass": "toast-"+position,
+                            "showDuration": "10000000",
+                            "hideDuration": "10000000",
+                            "timeOut": "10000000",
+                            "extendedTimeOut": "10000000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut",
+                            onHidden: function() {
+                                create_cookie();
+                            }
+                        }
+
+                        var cookie_value = jQuery.cookie(cookie_name);
+                        if(cookie_value == null || !cookie_value){
+                            clear_cookies();
+                        }
+
+                        if(cookie_value){
+                            toastr.clear();
+                        }else{
+                            toastr.info(information_box_text, information_box_title);
                         }
                     }
 
-                    var cookie_value = jQuery.cookie(cookie_name);
-                    if(cookie_value == null || !cookie_value){
-                        clear_cookies();
-                    }
-
-                    if(cookie_value){
-                        toastr.clear();
-                    }else{
-                        toastr.info(information_box_text, information_box_title);
-                    }
                 }
 
-            }
+            }();
 
-        }();
+            (function ( $ ) {
+                "use strict";
 
-        (function ( $ ) {
-            "use strict";
+                $(function () {
 
-            $(function () {
+                    TAP_Cookies.init();
 
-                TAP_Cookies.init();
+                });
 
-            });
-
-        }(jQuery));
-    </script>
-<?php
+            }(jQuery));
+        </script>
+<?php   endif;
     }
 
     /**

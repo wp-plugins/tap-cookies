@@ -4,7 +4,7 @@ Donate link: http://todoapuestas.org/
 Tags: cookies, europe cookie law
 Requires at least: 3.5.1
 Tested up to: 3.9.2
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -67,11 +67,11 @@ Nothing for now
 
 == Changelog ==
 
-= 1.0 =
-* Initial release.
+= 1.2.1 =
+* Minor update, on TAP_Cookies class added restriction to show information box only if the current browser not runs on a mobile device
 
 = 1.2 =
-* On class TAP_Cookies apply the following refactored:
+* On TAP_Cookies class apply the following refactored:
   1. updated get_unknown_cookies method
   2. updated get_cookies method
   3. changed method get_cookie_message_text to get_information_box_text
@@ -89,10 +89,13 @@ Nothing for now
   3. updated method unknown_cookies_detected_dashboard_widget
   4. updated method dashboard_setu
 
+= 1.0 =
+* Initial release.
+
 
 == Upgrade Notice ==
 
-You must upgrade as soon as posible to version 1.2. See Changelog for details
+You must upgrade as soon as posible to version 1.2 or later. See Changelog section for details.
 
 
 == Arbitrary section ==
